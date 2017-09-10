@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "supervisor ./src/app/index.js"
   },
   "author": "Duke",
   "license": "MIT",
   "dependencies": {
     "base64-img": "^1.0.3",
     "express": "^4.15.4",
+    "ip": "^1.1.5",
     "socket.io": "^2.0.3"
   }
 }
