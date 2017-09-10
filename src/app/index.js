@@ -21,7 +21,9 @@ app.get('/', function (req, res) {
 });
 
 app.get('/api/iploc', function (req, res) {
-    res.send(`http://${ip.address()}:3000`);
+    res.send({
+        url: `http://${ip.address()}:3000`
+    });
 });
 
 io.on('connection', function (socket) {

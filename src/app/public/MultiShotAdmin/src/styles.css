@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-family: arial, Helvetica, sans-serif;
+  font-size: 1.5rem;
+}
+
+.container {
+  min-width: 320px;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+}
