@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SocketService } from '../services/socket/socket.service';
 
 @Component({
   selector: 'app-camera-views',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CameraViewsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public socketService: SocketService) { }
 
   ngOnInit() {
   }

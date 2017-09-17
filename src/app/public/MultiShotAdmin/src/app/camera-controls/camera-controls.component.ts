@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SocketService } from "../services/socket/socket.service";
+import { SocketService } from '../services/socket/socket.service';
 
 @Component({
   selector: 'app-camera-controls',
@@ -17,5 +17,9 @@ export class CameraControlsComponent implements OnInit {
 
   public emitShot() {
     this.socketService.emitShot();
+  }
+
+  public selectFolder() {
+    this.socketService.selectFolder();
   }
 }

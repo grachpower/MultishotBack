@@ -2,7 +2,7 @@ const electron = require('electron');
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow
+const BrowserWindow = electron.BrowserWindow;
 
 const path = require('path');
 const url = require('url');
@@ -30,6 +30,7 @@ function createWindow () {
     //     slashes: true,
     // }));
     mainWindow.loadURL(`http://localhost:3000`);
+    // mainWindow.webContents.openDevTools();
 
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()

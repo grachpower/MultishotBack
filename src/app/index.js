@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 
 const express = require('express');
 const app = require('express')();
@@ -14,7 +15,13 @@ const base64Img = require('base64-img');
 const ip = require('ip');
 io.origins('*:*');
 
+// const {BrowserWindow} = require('electron').remote;
+const dialog = require('electron').dialog;
+
+
 const picBaseDir = `${__dirname}/../../pictures`;
+
+let picturePath = '';
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/public/MultiShotAdmin/dist/index.html');
@@ -37,7 +44,11 @@ io.on('connection', function (socket) {
 
     socket.on('loadPic', (data) => {
         convertImgToFile(data, socket.id);
-    })
+    });
+
+    socket.on('filePath', (data) => {
+        selectDirectory(socket);
+    });
 });
 
 http.listen(3000, function () {
@@ -47,6 +58,9 @@ http.listen(3000, function () {
 function convertImgToFile(data, socketId) {
     base64Img.img(data.imgBase, createFullFilePath(data.timestamp), socketId, (err, filePath) => {
         console.log('filePath', filePath);
+        io.emit('filePath', {
+            filePath: filePath,
+        });
     });
 }
 
@@ -57,5 +71,15 @@ function createLocalTimestamp() {
 }
 
 function createFullFilePath(timestamp) {
-    return `${picBaseDir}/${timestamp}`;
+    return `${picturePath}/${timestamp}`;
+}
+
+function selectDirectory() {
+    dialog.showOpenDialog({
+        properties: ['openDirectory']
+    }, (value) => {
+        if (value) {
+            picturePath = value[0];
+        }
+    });
 }

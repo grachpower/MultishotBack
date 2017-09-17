@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 
 import * as io from 'socket.io-client';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class SocketService {
   private socket;
   private domainUrl: string;
+  private socketStream: Subject<any> = new Subject();
 
   constructor() { }
 
@@ -13,6 +15,7 @@ export class SocketService {
     this.domainUrl = urlToConnect;
 
     this.socket = io.connect(urlToConnect);
+    this.socketStream.next(this.socket);
   }
 
   public disconnect() {
@@ -23,8 +26,11 @@ export class SocketService {
     this.socket.emit('shot');
   }
 
-  public subscribeOnShot() {
+  public subscribeOnShot(): void {
 
   };
 
+  public selectFolder(): void {
+    this.socket.emit('filePath');
+  }
 }
